@@ -1,13 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 // Redux
 import { useDispatch } from 'react-redux'
-import { deleteProductAction } from '../../actions/productsActions'
+import { deleteProductAction, retrieveProductEdit } from '../../actions/productsActions'
 
-const Product = ({ name, price, id }) => {
+const Product = (product) => {
+  const { name, price, id } = product
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const confirmDeleteProduct = id => {
     // preguntar al usuario
@@ -28,17 +30,26 @@ const Product = ({ name, price, id }) => {
     })
   }
 
+  // función que redirige de forma programada, es mejor que Link
+  const redirectionEdition = product => {
+    dispatch(retrieveProductEdit(product))
+    history.push(`products/edit/${id}`)
+  }
+
   return (
     <tr>
       <td>{name}</td>
       <td>{price}</td>
       <td>
         <td>{id}</td>
-        <Link to={`/products/edit/${id}`}>Edit</Link>
+        <button
+          type='button'
+          onClick={() => redirectionEdition(product)}
+        >Edit</button>
         <button
           type='button'
           onClick={() => confirmDeleteProduct(id)}
-          >Delete</button>
+        >Delete</button>
       </td>
     </tr>
   )

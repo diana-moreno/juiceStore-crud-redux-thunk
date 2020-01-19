@@ -7,7 +7,11 @@ import {
   PRODUCTS_DOWNLOAD_ERROR,
   RETRIEVE_PRODUCT_DELETE,
   PRODUCT_DELETED_OK,
-  PRODUCT_DELETED_ERROR
+  PRODUCT_DELETED_ERROR,
+  RETRIEVE_PRODUCT_EDIT,
+  BEGIN_EDIT_PRODUCT,
+  PRODUCT_EDITED_OK,
+  PRODUCT_EDITED_ERROR
 } from '../types'
 
 // cada reducer tiene su propi state
@@ -39,6 +43,7 @@ export default function(state = initialState, action) {
     case ADD_PRODUCT_ERROR:
     case PRODUCTS_DOWNLOAD_ERROR:
     case PRODUCT_DELETED_ERROR:
+    case PRODUCT_EDITED_ERROR:
       return {
         ...state,
         loading: false,
@@ -62,6 +67,21 @@ export default function(state = initialState, action) {
         ...state,
         products: state.products.filter(product => product.id !== state.deleteProduct),
         deleteProduct: null
+      }
+
+    case RETRIEVE_PRODUCT_EDIT:
+      return {
+        ...state,
+        editProduct: action.payload
+      }
+
+    case PRODUCT_EDITED_OK:
+      return {
+        ...state,
+        editProduct: null,
+        products: state.products.map(product =>
+          product.id === action.payload.id ? product = action.payload : product
+        ) // hace falta iterar por todos si ya sabemos cual es el que cambia?
       }
 
     default:

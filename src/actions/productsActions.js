@@ -7,12 +7,36 @@ import {
   PRODUCTS_DOWNLOAD_ERROR,
   RETRIEVE_PRODUCT_DELETE,
   PRODUCT_DELETED_OK,
-  PRODUCT_DELETED_ERROR
+  PRODUCT_DELETED_ERROR,
+  RETRIEVE_PRODUCT_EDIT,
+  BEGIN_EDIT_PRODUCT,
+  PRODUCT_EDITED_OK,
+  PRODUCT_EDITED_ERROR
 } from '../types'
 import axiosClient from '../config/axios'
 import Swal from 'sweetalert2'
 
 // Crear nuevos productos
+
+// cuando se declara una función aquí, también hay que declararlo en los reducers.
+const addProduct = () => ({
+  type: ADD_PRODUCT,
+  payload: true
+})
+
+const addProductOk = product => ({ // lo que hay entre paréntesis es el action
+  type: ADD_PRODUCT_OK,
+  payload: product
+})
+
+const addProductError = state => ({
+  type: ADD_PRODUCT_ERROR,
+  payload: state
+})
+// esta es la función que se tiene que utilizar en el componente, así los datos del componente se pueden pasar a las acciones y después se ejecutan con dispatch.
+//
+// payload: el que modifica el state
+// dispatch: es el que manda ejecutar las acciones
 
 export function createNewProductAction(product) {
   return async (dispatch) => {
@@ -44,40 +68,7 @@ export function createNewProductAction(product) {
   }
 }
 
-// cuando se declara una función aquí, también hay que declararlo en los reducers.
-const addProduct = () => ({
-  type: ADD_PRODUCT,
-  payload: true
-})
-
-const addProductOk = product => ({ // lo que hay entre paréntesis es el action
-  type: ADD_PRODUCT_OK,
-  payload: product
-})
-
-const addProductError = state => ({
-  type: ADD_PRODUCT_ERROR,
-  payload: state
-})
-// esta es la función que se tiene que utilizar en el componente, así los datos del componente se pueden pasar a las acciones y después se ejecutan con dispatch.
-//
-// payload: el que modifica el state
-// dispatch: es el que manda ejecutar las acciones
-
 // función que descarga los productos de la base de datos
-export function retrieveProductsAction() {
-  return async (dispatch) => {
-    dispatch(downloadProducts())
-
-    try {
-      const response = await axiosClient.get('/products')
-      console.log(response.data)
-      dispatch( downloadProductsOk(response.data))
-    } catch(error) {
-      dispatch(downloadProductsError())
-    }
-  }
-}
 
 const downloadProducts = () => ({
   type: BEGIN_PRODUCTS_DOWNLOAD,
@@ -94,8 +85,36 @@ const downloadProductsError = () => ({
   payload: true
 })
 
+export function retrieveProductsAction() {
+  return async (dispatch) => {
+    dispatch(downloadProducts())
+
+    try {
+      const response = await axiosClient.get('/products')
+      console.log(response.data)
+      dispatch( downloadProductsOk(response.data))
+    } catch(error) {
+      dispatch(downloadProductsError())
+    }
+  }
+}
+
 
 // selecciona y elimina el producto
+const retrieveProductDelete = id => ({
+  type: RETRIEVE_PRODUCT_DELETE,
+  payload: id
+})
+
+const deleteProductOk = () => ({
+  type: PRODUCT_DELETED_OK
+})
+
+const deleteProductError = () => ({
+  type: PRODUCT_DELETED_ERROR,
+  payload: true
+})
+
 export function deleteProductAction(id) {
   return async (dispatch) => {
     dispatch(retrieveProductDelete(id))
@@ -114,16 +133,44 @@ export function deleteProductAction(id) {
   }
 }
 
-const retrieveProductDelete = id => ({
-  type: RETRIEVE_PRODUCT_DELETE,
-  payload: id
+
+// editar producto
+const retrieveProductAction = product => ({
+  type: RETRIEVE_PRODUCT_EDIT,
+  payload: product
 })
 
-const deleteProductOk = () => ({
-  type: PRODUCT_DELETED_OK
+export function retrieveProductEdit(product) {
+  return (dispatch) => {
+    dispatch(retrieveProductAction(product))
+  }
+}
+
+
+// editar
+
+const editProduct = () => ({
+  type: BEGIN_EDIT_PRODUCT
 })
 
-const deleteProductError = () => ({
-  type: PRODUCT_DELETED_ERROR,
+const editProductOk = product => ({
+  type: PRODUCT_EDITED_OK,
+  payload: product
+})
+
+const editProductError = () => ({
+  type: PRODUCT_EDITED_ERROR,
   payload: true
 })
+
+export function editProductAction(product) {
+  return async (dispatch) => {
+    dispatch( editProduct(product))
+    try {
+      await axiosClient.put(`/products/${product.id}`, product)
+      dispatch(editProductOk(product))
+    } catch (error) {
+      dispatch(editProductError())
+    }
+  }
+}
