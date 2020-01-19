@@ -21,11 +21,11 @@ export function createNewProductAction(product) {
     dispatch(addProduct())
     try {
       // insertar en la API
-      await axiosClient.post('/products', product)
+      let response = await axiosClient.post('/products', product)
+      return response.data // sin este return, no se crean bien!!!!
 
       // si todo sale bien, modificar estado
       dispatch(addProductOk(product))
-
       // Alerta
       Swal.fire(
         'Correct',
@@ -102,6 +102,12 @@ export function deleteProductAction(id) {
     try {
       await axiosClient.delete(`/products/${id}`)
       dispatch(deleteProductOk())
+      // Alerta si lo elimina
+      Swal.fire(
+        'Deleted!',
+        'The product has been deleted.',
+        'success'
+      )
     } catch(error) {
       dispatch(deleteProductError())
     }

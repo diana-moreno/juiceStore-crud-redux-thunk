@@ -16,7 +16,7 @@ const Newproduct = ({ history }) => {
   const error = useSelector(state => state.products.error) // true o false
 
   // se utiliza dispatch para ejecutar las acciones
-  const addProduct = product => dispatch(createNewProductAction(product))
+  const addProduct = async product => await dispatch(createNewProductAction(product))
 
   const submitNewProduct = event => {
     event.preventDefault()

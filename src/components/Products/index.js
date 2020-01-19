@@ -8,16 +8,18 @@ import Product from '../Product'
 const Products = () => {
 
   const dispatch = useDispatch()
-  const products = useSelector(state => state.products.products)
-  const error = useSelector(state => state.products.error)
-  const loading = useSelector(state => state.products.loading)
 
   useEffect(() => {
-    (() => {
-      dispatch(retrieveProductsAction())
+    (async () => {
+      console.log('reinicia')
+      const products = await dispatch(retrieveProductsAction())
+      console.log(products)
     })()
   }, [])
 
+  let products = useSelector(state => state.products.products)
+  const error = useSelector(state => state.products.error)
+  const loading = useSelector(state => state.products.loading)
 
   return (
     <div>
