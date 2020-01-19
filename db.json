@@ -2,27 +2,27 @@
   "products": [
     {
       "id": 1,
-      "nombre": "Carrot juice",
-      "precio": "3.20"
+      "name": "Carrot juice",
+      "price": "3.20"
     },
     {
       "id": 2,
-      "nombre": "Apple juice",
-      "precio": "2.99"
+      "name": "Apple juice",
+      "price": "2.99"
     },
     {
-      "nombre": "Coconut water",
-      "precio": "3.00",
+      "name": "Coconut water",
+      "price": "3.00",
       "id": 3
     },
     {
-      "nombre": "Lemon juice",
-      "precio": "2.65",
+      "name": "Lemon juice",
+      "price": "2.65",
       "id": 4
     },
     {
-      "nombre": "strawberry juice",
-      "precio": "2.85",
+      "name": "strawberry juice",
+      "price": "2.85",
       "id": 5
     },
     {
@@ -39,11 +39,6 @@
       "name": "berry2 juice",
       "price": 4,
       "id": 8
-    },
-    {
-      "name": "Gato",
-      "price": 2,
-      "id": 9
     }
   ]
 }

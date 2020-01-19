@@ -4,7 +4,10 @@ import {
   ADD_PRODUCT_ERROR,
   BEGIN_PRODUCTS_DOWNLOAD,
   PRODUCTS_DOWNLOAD_OK,
-  PRODUCTS_DOWNLOAD_ERROR
+  PRODUCTS_DOWNLOAD_ERROR,
+  RETRIEVE_PRODUCT_DELETE,
+  PRODUCT_DELETED_OK,
+  PRODUCT_DELETED_ERROR
 } from '../types'
 
 // cada reducer tiene su propi state
@@ -12,7 +15,8 @@ import {
 const initialState = {
   products: [],
   error: false,
-  loading: false
+  loading: false,
+  deleteProduct: null
 }
 
 export default function(state = initialState, action) {
@@ -32,8 +36,9 @@ export default function(state = initialState, action) {
         products: [...state.products, action.payload]
       }
 
-    case PRODUCTS_DOWNLOAD_ERROR:
     case ADD_PRODUCT_ERROR:
+    case PRODUCTS_DOWNLOAD_ERROR:
+    case PRODUCT_DELETED_ERROR:
       return {
         ...state,
         loading: false,
@@ -46,6 +51,17 @@ export default function(state = initialState, action) {
         loading: false,
         error: null,
         products: action.payload
+      }
+    case RETRIEVE_PRODUCT_DELETE:
+      return {
+        ...state,
+        deleteProduct: action.payload
+      }
+    case PRODUCT_DELETED_OK:
+      return {
+        ...state,
+        products: state.products.filter(product => product.id !== state.deleteProduct),
+        deleteProduct: null
       }
 
     default:
