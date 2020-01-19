@@ -1,0 +1,29 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "nombre": "Carrot juice",
+      "precio": "3.20"
+    },
+    {
+      "id": 2,
+      "nombre": "Apple juice",
+      "precio": "2.99"
+    },
+    {
+      "nombre": "Coconut water",
+      "precio": "3.00",
+      "id": 3
+    },
+    {
+      "nombre": "Lemon juice",
+      "precio": "2.65",
+      "id": 4
+    },
+    {
+      "nombre": "strawberry juice",
+      "precio": "2.85",
+      "id": 5
+    }
+  ]
+}
