@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // use Dispatch sirve para mandar ejecutar las acciones que tengamos en las actions y useSelector es la forma en la que vamos a acceder al state dentro del componente. Usedispatch devuelve una función
 import { createNewProductAction } from '../../actions/productsActions'
+import { showAlert, hideAlertAction } from '../../actions/alertActions'
 
 const Newproduct = ({ history }) => {
   // state del commponente
@@ -14,6 +15,7 @@ const Newproduct = ({ history }) => {
   // acceder al state del store
   const loading = useSelector(state => state.products.loading) // será true o false
   const error = useSelector(state => state.products.error) // true o false
+  const alert = useSelector(state => state.alert.alert)
 
   // se utiliza dispatch para ejecutar las acciones
   const addProduct = async product => await dispatch(createNewProductAction(product))
@@ -22,9 +24,15 @@ const Newproduct = ({ history }) => {
     event.preventDefault()
     // validar formulario
     if(name.trim() === '' || price <= 0) {
+      const alert = {
+        msg: 'All fields are required.'
+      }
+      dispatch(showAlert(alert))
       return
     }
+
     // si no hay errores
+    dispatch(hideAlertAction())
 
     // crear nuevo producto
     addProduct({
@@ -39,6 +47,7 @@ const Newproduct = ({ history }) => {
   return (
     <div>
       <h1>Add new product</h1>
+      { alert ? <p>{alert.msg}</p> : null }
       <form onSubmit={submitNewProduct} >
         <section>
           <label>Product name</label>

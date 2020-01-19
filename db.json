@@ -6,9 +6,9 @@
       "id": 1
     },
     {
-      "id": 2,
       "name": "Apple juice",
-      "price": "2.99"
+      "price": "5",
+      "id": 2
     },
     {
       "name": "Coconut water",
@@ -39,6 +39,26 @@
       "name": "Dianaeg",
       "price": 1,
       "id": 12
+    },
+    {
+      "name": "Luis",
+      "price": 2,
+      "id": 13
+    },
+    {
+      "name": "asdg",
+      "price": 1,
+      "id": 14
+    },
+    {
+      "name": "Gato",
+      "price": 1,
+      "id": 15
+    },
+    {
+      "name": "Prueba",
+      "price": 2,
+      "id": 16
     }
   ]
 }
