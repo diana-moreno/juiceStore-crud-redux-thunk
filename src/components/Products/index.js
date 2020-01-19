@@ -1,6 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+// Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { retrieveProductsAction } from '../../actions/productsActions'
+// useSelector es para recoger el state
 
 const Products = () => {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    (() => {
+      dispatch(retrieveProductsAction())
+    })()
+  }, [])
+
   return (
     <div>
       <h1>Products</h1>
