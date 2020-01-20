@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "name": "Carrot juice 2",
+      "name": "Carrot juice",
       "price": "3",
       "id": 1
     },
@@ -12,53 +12,23 @@
     },
     {
       "name": "Coconut water",
-      "price": "3.00",
+      "price": "3",
       "id": 3
     },
     {
       "name": "Lemon juice",
-      "price": "2.65",
+      "price": "2",
       "id": 4
     },
     {
       "name": "strawberry juice",
-      "price": "2.85",
+      "price": "2",
       "id": 5
     },
     {
       "name": "berry juice",
-      "price": 4,
+      "price": "5",
       "id": 7
-    },
-    {
-      "name": "Luis",
-      "price": 1,
-      "id": 11
-    },
-    {
-      "name": "Dianaeg",
-      "price": 1,
-      "id": 12
-    },
-    {
-      "name": "Luis",
-      "price": 2,
-      "id": 13
-    },
-    {
-      "name": "asdg",
-      "price": 1,
-      "id": 14
-    },
-    {
-      "name": "Gato",
-      "price": 1,
-      "id": 15
-    },
-    {
-      "name": "Prueba",
-      "price": 2,
-      "id": 16
     }
   ]
 }

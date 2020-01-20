@@ -46,7 +46,8 @@ export function createNewProductAction(product) {
     try {
       // insertar en la API
       let response = await axiosClient.post('/products', product)
-      return response.data // sin este return, no se crean bien!!!!
+
+      //return response.data // sin este return, no se crean bien!!!!
 
       // si todo sale bien, modificar estado
       dispatch(addProductOk(product))
@@ -91,8 +92,8 @@ export function retrieveProductsAction() {
 
     try {
       const response = await axiosClient.get('/products')
-      console.log(response.data)
-      dispatch( downloadProductsOk(response.data))
+      dispatch(downloadProductsOk(response.data))
+      return response.data
     } catch(error) {
       dispatch(downloadProductsError())
     }

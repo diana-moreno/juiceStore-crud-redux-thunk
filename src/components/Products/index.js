@@ -11,7 +11,6 @@ const Products = () => {
 
   useEffect(() => {
     (async () => {
-      console.log('reinicia')
       const products = await dispatch(retrieveProductsAction())
       console.log(products)
     })()

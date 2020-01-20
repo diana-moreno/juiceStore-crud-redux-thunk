@@ -18,9 +18,9 @@ const Newproduct = ({ history }) => {
   const alert = useSelector(state => state.alert.alert)
 
   // se utiliza dispatch para ejecutar las acciones
-  const addProduct = async product => await dispatch(createNewProductAction(product))
+  const addProduct = product => dispatch(createNewProductAction(product))
 
-  const submitNewProduct = event => {
+  const submitNewProduct = async event => {
     event.preventDefault()
     // validar formulario
     if(name.trim() === '' || price <= 0) {
@@ -35,11 +35,10 @@ const Newproduct = ({ history }) => {
     dispatch(hideAlertAction())
 
     // crear nuevo producto
-    addProduct({
+    await addProduct({ // sin await no funciona porque cambia de pantalla sin añadir el producto a la base de datos!
       name,
       price
     })
-
     // redireccionar al componente principal
     history.push('/')
   }
