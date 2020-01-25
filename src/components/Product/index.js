@@ -1,18 +1,16 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
-// Redux
 import { useDispatch } from 'react-redux'
-import { deleteProductAction, retrieveProductEdit } from '../../actions/productsActions'
+import { deleteProductAction, retrieveProductEdit } from '../../actions/products-actions'
 
 const Product = (product) => {
   const { name, price, id } = product
-
   const dispatch = useDispatch()
   const history = useHistory()
 
   const confirmDeleteProduct = id => {
-    // preguntar al usuario
+    // ask the user for confirmation
     Swal.fire({
       title: 'Are you sure you want to delete the product?',
       text: "You won't be able to revert this!",
@@ -23,9 +21,7 @@ const Product = (product) => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if(result.value) {
-        // pasarlo al action
         dispatch(deleteProductAction(id))
-        console.log(id)
       }
     })
   }
@@ -40,8 +36,8 @@ const Product = (product) => {
     <tr>
       <td>{name}</td>
       <td>{price}</td>
+      <td>{id}</td>
       <td>
-        <td>{id}</td>
         <button
           type='button'
           onClick={() => redirectionEdition(product)}

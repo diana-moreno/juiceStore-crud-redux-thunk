@@ -1,19 +1,16 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// use Dispatch sirve para mandar ejecutar las acciones que tengamos en las actions y useSelector es la forma en la que vamos a acceder al state dentro del componente. Usedispatch devuelve una función
-import { createNewProductAction } from '../../actions/productsActions'
-import { showAlert, hideAlertAction } from '../../actions/alertActions'
+import { createNewProductAction } from '../../actions/products-actions'
+import { showAlert, hideAlertAction } from '../../actions/alert-actions'
 
 const Newproduct = ({ history }) => {
-  // state del commponente
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
 
-  // al utilizar useDispatch crea una función que recibe otra función
   const dispatch = useDispatch()
 
-  // acceder al state del store
-  const loading = useSelector(state => state.products.loading) // será true o false
+  // access the store state
+  const loading = useSelector(state => state.products.loading) // true o false
   const error = useSelector(state => state.products.error) // true o false
   const alert = useSelector(state => state.alert.alert)
 
@@ -22,7 +19,7 @@ const Newproduct = ({ history }) => {
 
   const submitNewProduct = async event => {
     event.preventDefault()
-    // validar formulario
+    // validate form
     if(name.trim() === '' || price <= 0) {
       const alert = {
         msg: 'All fields are required.'
@@ -30,16 +27,14 @@ const Newproduct = ({ history }) => {
       dispatch(showAlert(alert))
       return
     }
-
-    // si no hay errores
+    // if no errors
     dispatch(hideAlertAction())
-
-    // crear nuevo producto
-    await addProduct({ // sin await no funciona porque cambia de pantalla sin añadir el producto a la base de datos!
+    // create new product
+    await addProduct({
       name,
       price
     })
-    // redireccionar al componente principal
+    // redirect to main component
     history.push('/')
   }
 

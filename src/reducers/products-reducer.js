@@ -14,8 +14,6 @@ import {
   PRODUCT_EDITED_ERROR
 } from '../types'
 
-// cada reducer tiene su propi state
-
 const initialState = {
   products: [],
   error: false,
@@ -36,7 +34,7 @@ export default function(state = initialState, action) {
     case ADD_PRODUCT_OK:
       return {
         ...state,
-        loading: false, // se cambia directamente??
+        loading: false,
         products: [...state.products, action.payload]
       }
 
@@ -81,7 +79,7 @@ export default function(state = initialState, action) {
         editProduct: null,
         products: state.products.map(product =>
           product.id === action.payload.id ? product = action.payload : product
-        ) // hace falta iterar por todos si ya sabemos cual es el que cambia?
+        )
       }
 
     default:

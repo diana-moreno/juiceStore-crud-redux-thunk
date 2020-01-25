@@ -4,7 +4,6 @@ import {
 } from '../types'
 
 // Show alert
-
 const createAlert = alert => ({
   type: SHOW_ALERT,
   payload: alert
@@ -17,7 +16,6 @@ export function showAlert(alert) {
 }
 
 // Hide alert
-
 const hideAlert = () => ({
   type: HIDE_ALERT,
   payload: null

@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { editProductAction } from '../../actions/productsActions'
+import { editProductAction } from '../../actions/products-actions'
 import { useHistory } from 'react-router-dom'
 
 const EditProduct = () => {
+  const history = useHistory()
+  const dispatch = useDispatch()
   const [product, setProduct] = useState({
     name: '',
     price: ''
   })
-  const history = useHistory()
-  const dispatch = useDispatch()
 
   const productEdit = useSelector(state => state.products.editProduct)
 
-  // llenar el state automáticamente
+  // fill state
   useEffect(() => {
     setProduct(productEdit)
   }, [productEdit])
@@ -25,13 +25,12 @@ const EditProduct = () => {
     history.push('/')
   }
 
-  // leer los datos del formulario
+  // read data from form
   const onChangeForm = event => {
     setProduct({
       ...product,
       [event.target.name] : event.target.value
     })
-
   }
 
   return (

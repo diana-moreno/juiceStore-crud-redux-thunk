@@ -1,18 +1,14 @@
 import React, { useEffect } from 'react'
-// Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { retrieveProductsAction } from '../../actions/productsActions'
-// useSelector es para recoger el state
+import { retrieveProductsAction } from '../../actions/products-actions'
 import Product from '../Product'
 
 const Products = () => {
-
   const dispatch = useDispatch()
 
   useEffect(() => {
     (async () => {
       const products = await dispatch(retrieveProductsAction())
-      console.log(products)
     })()
   }, [])
 
@@ -30,6 +26,7 @@ const Products = () => {
           <tr>
             <th>Name</th>
             <th>Price</th>
+            <th>Id</th>
             <th>Actions</th>
           </tr>
         </thead>

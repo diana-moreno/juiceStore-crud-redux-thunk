@@ -15,62 +15,15 @@ import {
 } from '../types'
 import axiosClient from '../config/axios'
 import Swal from 'sweetalert2'
+import {
+  retrieveProductsDB,
+  addProductDB,
+  deleteProductDB,
+  editProductDB
+} from '../api-calls'
 
-// Crear nuevos productos
 
-// cuando se declara una función aquí, también hay que declararlo en los reducers.
-const addProduct = () => ({
-  type: ADD_PRODUCT,
-  payload: true
-})
-
-const addProductOk = product => ({ // lo que hay entre paréntesis es el action
-  type: ADD_PRODUCT_OK,
-  payload: product
-})
-
-const addProductError = state => ({
-  type: ADD_PRODUCT_ERROR,
-  payload: state
-})
-// esta es la función que se tiene que utilizar en el componente, así los datos del componente se pueden pasar a las acciones y después se ejecutan con dispatch.
-//
-// payload: el que modifica el state
-// dispatch: es el que manda ejecutar las acciones
-
-export function createNewProductAction(product) {
-  return async (dispatch) => {
-    // mandar a base de datos o ejecutar el reducer
-    console.log(product)
-    dispatch(addProduct())
-    try {
-      // insertar en la API
-      let response = await axiosClient.post('/products', product)
-
-      //return response.data // sin este return, no se crean bien!!!!
-
-      // si todo sale bien, modificar estado
-      dispatch(addProductOk(product))
-      // Alerta
-      Swal.fire(
-        'Correct',
-        'The product has been added successfully',
-        'success'
-      )
-    } catch (error) {
-      console.log(error)
-      dispatch(addProductError(true))
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'An error ocurred. Please, try it again.'
-      })
-    }
-  }
-}
-
-// función que descarga los productos de la base de datos
-
+// Download products actions
 const downloadProducts = () => ({
   type: BEGIN_PRODUCTS_DOWNLOAD,
   payload: true
@@ -91,9 +44,9 @@ export function retrieveProductsAction() {
     dispatch(downloadProducts())
 
     try {
-      const response = await axiosClient.get('/products')
-      dispatch(downloadProductsOk(response.data))
-      return response.data
+      const {data} = await retrieveProductsDB()
+      dispatch(downloadProductsOk(data))
+      return data // es necesario???
     } catch(error) {
       dispatch(downloadProductsError())
     }
@@ -101,7 +54,47 @@ export function retrieveProductsAction() {
 }
 
 
-// selecciona y elimina el producto
+// Create new products
+const addProduct = () => ({
+  type: ADD_PRODUCT,
+  payload: true
+})
+
+const addProductOk = product => ({
+  type: ADD_PRODUCT_OK,
+  payload: product
+})
+
+const addProductError = state => ({
+  type: ADD_PRODUCT_ERROR,
+  payload: state
+})
+
+export function createNewProductAction(product) {
+  return async (dispatch) => {
+    dispatch(addProduct())
+    try {
+      await addProductDB(product)
+      dispatch(addProductOk(product))
+      // Alert
+      Swal.fire(
+        'Correct',
+        'The product has been added successfully',
+        'success'
+      )
+    } catch (error) {
+      dispatch(addProductError(true))
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An error ocurred. Please, try it again.'
+      })
+    }
+  }
+}
+
+
+// Delete products
 const retrieveProductDelete = id => ({
   type: RETRIEVE_PRODUCT_DELETE,
   payload: id
@@ -120,9 +113,9 @@ export function deleteProductAction(id) {
   return async (dispatch) => {
     dispatch(retrieveProductDelete(id))
     try {
-      await axiosClient.delete(`/products/${id}`)
+      await deleteProductDB(id)
       dispatch(deleteProductOk())
-      // Alerta si lo elimina
+      // Alert
       Swal.fire(
         'Deleted!',
         'The product has been deleted.',
@@ -135,7 +128,7 @@ export function deleteProductAction(id) {
 }
 
 
-// editar producto
+// Edit product
 const retrieveProductAction = product => ({
   type: RETRIEVE_PRODUCT_EDIT,
   payload: product
@@ -146,9 +139,6 @@ export function retrieveProductEdit(product) {
     dispatch(retrieveProductAction(product))
   }
 }
-
-
-// editar
 
 const editProduct = () => ({
   type: BEGIN_EDIT_PRODUCT
@@ -166,9 +156,9 @@ const editProductError = () => ({
 
 export function editProductAction(product) {
   return async (dispatch) => {
-    dispatch( editProduct(product))
+    dispatch(editProduct(product))
     try {
-      await axiosClient.put(`/products/${product.id}`, product)
+      await editProductDB(product)
       dispatch(editProductOk(product))
     } catch (error) {
       dispatch(editProductError())
