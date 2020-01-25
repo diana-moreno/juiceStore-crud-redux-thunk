@@ -13,7 +13,6 @@ import {
   PRODUCT_EDITED_OK,
   PRODUCT_EDITED_ERROR
 } from '../types'
-import axiosClient from '../config/axios'
 import Swal from 'sweetalert2'
 import {
   retrieveProductsDB,
@@ -42,11 +41,9 @@ const downloadProductsError = () => ({
 export function retrieveProductsAction() {
   return async (dispatch) => {
     dispatch(downloadProducts())
-
     try {
       const {data} = await retrieveProductsDB()
       dispatch(downloadProductsOk(data))
-      return data // es necesario???
     } catch(error) {
       dispatch(downloadProductsError())
     }

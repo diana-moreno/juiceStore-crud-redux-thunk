@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { retrieveProductsAction } from '../../actions/products-actions'
 import Product from '../Product'
+import './index.css'
 
 const Products = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     (async () => {
-      const products = await dispatch(retrieveProductsAction())
+      await dispatch(retrieveProductsAction())
     })()
   }, [])
 
