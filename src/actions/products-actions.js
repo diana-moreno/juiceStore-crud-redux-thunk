@@ -74,11 +74,12 @@ export function createNewProductAction(product) {
       await addProductDB(product)
       dispatch(addProductOk(product))
       // Alert
-      Swal.fire(
-        'Correct',
-        'The product has been added successfully',
-        'success'
-      )
+      Swal.fire({
+        title: 'Added!',
+        text: 'The product has been added successfully',
+        icon: 'success',
+        confirmButtonColor: '#62a086'
+      })
     } catch (error) {
       dispatch(addProductError(true))
       Swal.fire({
@@ -113,11 +114,12 @@ export function deleteProductAction(id) {
       await deleteProductDB(id)
       dispatch(deleteProductOk())
       // Alert
-      Swal.fire(
-        'Deleted!',
-        'The product has been deleted.',
-        'success'
-      )
+       Swal.fire({
+        title: 'Deleted!',
+        text: 'The product has been deleted.',
+        icon: 'success',
+        confirmButtonColor: '#62a086'
+      })
     } catch(error) {
       dispatch(deleteProductError())
     }
@@ -157,6 +159,13 @@ export function editProductAction(product) {
     try {
       await editProductDB(product)
       dispatch(editProductOk(product))
+      // Alert
+      Swal.fire({
+        title: 'Updated!',
+        text: 'The product has been updated.',
+        icon: 'success',
+        confirmButtonColor: '#62a086'
+      })
     } catch (error) {
       dispatch(editProductError())
     }

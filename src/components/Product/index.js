@@ -17,8 +17,8 @@ const Product = (product) => {
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#62a086',
+      cancelButtonColor: '#f66b61',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if(result.value) {

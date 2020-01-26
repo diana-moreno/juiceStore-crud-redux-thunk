@@ -34,13 +34,18 @@ const EditProduct = () => {
     })
   }
 
+  const goBack = () => {
+    history.push('/')
+  }
+
   return (
     <div>
+       <h2 className='table__title'>Edit product</h2>
       <form
+        className='form'
         onSubmit={submitEditProduct}
       >
-        <h1>Edit product</h1>
-        <section>
+        <section className='form__section'>
           <label>Product name</label>
           <input
             type='text'
@@ -49,7 +54,7 @@ const EditProduct = () => {
             onChange={onChangeForm}
           />
         </section>
-        <section>
+        <section className='form__section'>
           <label>Product price</label>
           <input
             type='number'
@@ -59,7 +64,14 @@ const EditProduct = () => {
             onChange={onChangeForm}
           />
         </section>
-        <button>Save changes</button>
+        <div className='button__container'>
+          <button
+            type='button'
+            className='button button--cancel'
+            onClick={goBack}
+           >Cancel</button>
+          <button className='button button--confirm'>Confirm</button>
+        </div>
       </form>
     </div>
   )
