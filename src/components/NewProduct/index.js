@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNewProductAction } from '../../actions/products-actions'
 import { showAlert, hideAlertAction } from '../../actions/alert-actions'
+import './index.css'
 
 const Newproduct = ({ history }) => {
   const [name, setName] = useState('')

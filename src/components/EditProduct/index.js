@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { editProductAction } from '../../actions/products-actions'
 import { useHistory } from 'react-router-dom'
+import './index.css'
 
 const EditProduct = () => {
   const history = useHistory()

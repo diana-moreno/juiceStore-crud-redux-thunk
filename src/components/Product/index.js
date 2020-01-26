@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { useDispatch } from 'react-redux'
 import { deleteProductAction, retrieveProductEdit } from '../../actions/products-actions'
+import './index.css'
 
 const Product = (product) => {
   const { name, price, id } = product
@@ -35,14 +36,15 @@ const Product = (product) => {
   return (
     <tr>
       <td>{name}</td>
-      <td>{price}</td>
-      <td>{id}</td>
-      <td>
+      <td className='prices'>{price} $</td>
+      <td className='button-container'>
         <button
+          className='button button--edit'
           type='button'
           onClick={() => redirectionEdition(product)}
         >Edit</button>
         <button
+          className='button button--delete'
           type='button'
           onClick={() => confirmDeleteProduct(id)}
         >Delete</button>
