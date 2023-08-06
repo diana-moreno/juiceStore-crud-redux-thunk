@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.435e5ce2.chunk.css",
+    "main.js": "/static/js/main.3ac28660.chunk.js",
+    "main.js.map": "/static/js/main.3ac28660.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ebb3302c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ebb3302c.js.map",
+    "static/js/2.999db6a0.chunk.js": "/static/js/2.999db6a0.chunk.js",
+    "static/js/2.999db6a0.chunk.js.map": "/static/js/2.999db6a0.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.f665f3b336293bb0a475d1924b6a4dc6.js": "/precache-manifest.f665f3b336293bb0a475d1924b6a4dc6.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.435e5ce2.chunk.css.map": "/static/css/main.435e5ce2.chunk.css.map",
+    "static/js/2.999db6a0.chunk.js.LICENSE": "/static/js/2.999db6a0.chunk.js.LICENSE",
+    "static/media/index.css": "/static/media/pineapple-2588302_1920.11a2189e.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ebb3302c.js",
+    "static/js/2.999db6a0.chunk.js",
+    "static/css/main.435e5ce2.chunk.css",
+    "static/js/main.3ac28660.chunk.js"
+  ]
+}
